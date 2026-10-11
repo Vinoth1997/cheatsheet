@@ -22,14 +22,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Send Notification
-        if: github.event_name == 'push'
         run: |
           curl -X POST https://slack.com/api/chat.postMessage \
           -H "Authorization: Bearer ${{ secrets.SLACK_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{
               "channel":"C0B1ZS9582C",
-              "text":"Repository Activity detected: ${{ github.event_name }}"
-              "text":"Repository Name: ${{ github.repository }}"
-              "text":"Author Name: ${{ github.actor }}"
+              "text":"Repository Activity detected: ${{ github.event_name }}\nRepository Name: ${{ github.repository }}\nAuthor Name: ${{ github.actor }}"
               }'
